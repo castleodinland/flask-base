@@ -9,7 +9,7 @@ app.config.from_pyfile('flaskapp.cfg')
 @app.route('/')
 @app.route('/index')
 def index():
-    return "<strong>Hello, World!</strong>"
+    return "<strong>Hello, Maomaosong!!!</strong>"
 
 @app.route("/test")
 def test():
