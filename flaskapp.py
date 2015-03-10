@@ -7,12 +7,9 @@ app = Flask(__name__)
 app.config.from_pyfile('flaskapp.cfg')
 
 @app.route('/')
+@app.route('/index')
 def index():
-    return render_template('index.html')
-
-@app.route('/<path:resource>')
-def serveStaticResource(resource):
-    return send_from_directory('static/', resource)
+    return "<strong>Hello, World!</strong>"
 
 @app.route("/test")
 def test():
