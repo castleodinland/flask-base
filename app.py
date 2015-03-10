@@ -9,6 +9,22 @@ import imp
 import os
 import sys
 
+import smtplib
+from email.mime.text import MIMEText  
+
+sourc_mail_addr = "cexuscastle@126.com"
+dest_mail_addr = ["cexuscastle@126.com"]
+
+def sendWarningMail (text):  
+    msg = MIMEText(text)  
+    msg['Subject'] = "It's from OpenShift"  
+    msg['From'] = sourc_mail_addr  
+    smtp = smtplib.SMTP()  
+    smtp.connect(r'smtp.126.com')
+    smtp.login(sourc_mail_addr, "zxcvbnm123")  
+    smtp.sendmail(sourc_mail_addr, dest_mail_addr, msg.as_string())  
+    smtp.close()
+
 try:
   virtenv = os.path.join(os.environ.get('OPENSHIFT_PYTHON_DIR','.'), 'virtenv')
   python_version = "python"+str(sys.version_info[0])+"."+str(sys.version_info[1]) 
@@ -32,6 +48,7 @@ except IOError:
 #  main():
 #
 if __name__ == '__main__':
+  sendWarningMail("It's from OpenShift for Castle!!!")
   application = imp.load_source('app', 'flaskapp.py')
   port = application.app.config['PORT']
   ip = application.app.config['IP']
